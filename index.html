@@ -1,48 +1,62 @@
+
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Data Visualisation Exercise 1" />
-    <meta name="keywords" content="HTML, CSS, D3" />
-    <meta name="author" content="Nicholas" />
-
-    <title>Task 2.1 D3 Data Binding</title>
-	<script src="http://d3js.org/d3.v6.min.js"></script>
-    <!--Insert description of exercise  -->
-
-    <style>
-		
-    </style>
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarawak Tourism HomePage</title>
+    <script src="http://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/colorbrewer.v1.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-	<h1>The D3 Journey starts here...</h1>
+  <header>
 
-	<script>
-		var dataset = [14, 5, 26, 23, 9];
+<nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dataset.html">Dataset</a></li>
+        <li><a href="#">Visualizations</a>
+            <ul>
+              <li><a href="mentalillness.html">Types of Mental Illness</a></li>
+              <li><a href="ageGroup.html">Age Group</a></li>
+              <li><a href="gender.html">Genders</a></li>
+              <li><a href="salaryGroup.html">Salary Group</a></li>
+              <li><a href="educationBackground.html">Education Background</a></li>
+              <li><a href="suicideRates.html">Suicide Rates</a></li>
+              <li><a href="continentIllness.html">Continent</a></li>
+              <li><a href="race.html">Race/Ethnicity</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Profile</a>
+            <ul>
+                <li><a href="peter.html">Peter</a></li>
+                <li><a href="yc.html">Yen Chiong</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+</header>
 
-		d3.select("body").selectAll("p")
-		.data(dataset)
-		.enter()
-		.append("p")
-		.style("color", function(d) {
-			if(d>10){
-				return "red"
-			}
-		})
-		.text(function(d){
-			if(d > 10){
-				return "Warning: Nick watched " + d + " cat videos today.";
-			} else {
-				return "Nick watched " + d + " cat videos today.";
-			}
-		});
-	</script>
-	<br>
-	<bf>
-	<footer style="color:grey">COS30045 Data Visualisation<br>
-		Nicholas</footer>
+<section class="home-1">
+  <h1>Mentall Illness 2013 - 2017</h1>
+  <img src="images/home.JPG" alt="Mentall Illness">
+  <h3>In the modern world, mental health issues are often being overlooked and people do not know how severe mental illness can be. Therefore, it is important to promote better awareness and understanding about mental health issues.</h3>
+  <p>Questions: </p>
+  <ul>
+      <li><a href="mentalillness.html">How many percent of people suffer from these illnesses and which illness is the most popular?</a></li>
+      <li><a href="ageGroup.html">Which age group should be aware of mental health issues?</a></li>
+      <li><a href="gender.html">Does mental illness occur higher in men or women?</a></li>
+      <li><a href="salaryGroup.html">Which salary group of people has the most potential of having mental health issues?</a></li>
+      <li><a href="educationBackground.html">Does education background and employment have a relationship with mental illness occurrence?</a></li>
+      <li><a href="suicideRates.html">What is the rate between suicide and mental illness?</a></li>
+      <li><a href="continentIllness.html">Which part of the world has the highest mental illness rate?</a></li>
+      <li><a href="race.html">Which race/ethnicity committed suicide has frequently/the most/ the most potential of having depressive disorder ?</a></li>
+  </ul>
+</section>
+<br>
+<br>
+
 </body>
 </html>

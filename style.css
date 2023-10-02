@@ -1,0 +1,266 @@
+/*HTML*/
+nav{
+    float: center;
+    margin-right: 5px;
+    margin-top: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+nav ul li{
+    background-color: #2e6e89;
+    display: inline-block;
+    border-radius: 30px;
+    text-align: center;
+    padding: 12px 0px;
+    width: 170px;
+    font-size: 11px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    position: relative;
+    box-shadow: 0 5px 12px rgba(32,32,32,.3);
+}
+
+nav ul li a{
+    color: #ffffff;
+}
+
+
+nav ul li:hover{
+    background-color: #0f4275;
+    color: #011c39;
+}
+
+
+nav ul ul{
+    display: none;
+}
+
+nav ul li:hover>ul{
+    display: block;
+    position: absolute;
+}
+
+nav ul li:hover>ul li:nth-child(1){
+    margin-top: 20px;
+    margin-bottom: 2px;
+}
+
+nav ul li:hover>ul li:nth-child(2),ul li:nth-child(3),ul li:nth-child(4),ul li:nth-child(5),ul li:nth-child(6),ul li:nth-child(7){
+    margin: 2px;
+}
+
+.about-1{
+    height: 100vh;
+    background-color: #FFFFFF;
+}
+
+.home-1 h3{
+  color: #FFFFFF;
+  text-align: center;
+  background-color: #2e6e89 ;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+  height: 25%;
+}
+
+/* About */
+.about-1{
+    height: 100vh;
+    text-align: center;
+    background-color: #FFFFFF;
+}
+.about-1 h1{
+  color: #FFFFFF;
+  text-align: center;
+  background-color: #011c39 ;
+}
+
+.personal_information{
+    width: 65vw;
+    height: 80vh;
+    margin-left: 30%;
+    margin-right: 25%;
+    margin-top: 50px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    background-color: #011c39;
+    box-shadow: 0 5px 12px rgba(32,32,32,.3);
+}
+
+.about-1 img{
+    float: left;
+    border-style: groove;
+    padding: 20px;
+    background-color: #011c39;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    margin-left: auto;
+    margin-top: auto;
+    box-shadow: 0 5px 12px rgba(32,32,32,.3);
+}
+
+.about-1 p{
+    padding: 10px;
+    color: #F0F8FF;
+}
+
+.about-1 .info-name{
+    font-weight: bold;
+    font-size: 200%;
+}
+
+.about-1 .info-studentno{
+    font-family: Arial, sans-serif;
+}
+
+.about-1 .info-course{
+    color: rgb(255, 255, 255);
+}
+
+.about-1 .ques{
+    font-family:  Courier New, monospace;
+}
+
+.about-2{
+    height: 80vh;
+    background-color: #FFFFFF;
+}
+
+.extra-details{
+    height: 70vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.extra-details h2{
+    text-align: center;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-top: 40px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.extra-details P{
+    text-align: center;
+    padding-top: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    line-height: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 13px;
+}
+
+.demographic, .hobbies, .hometown{
+    height: 50vh;
+    width: 30%;
+}
+
+.demographic{
+    border-right: 2px solid #011c39;
+}
+
+.hobbies{
+    border-left: 2px solid #011c39;
+}
+
+/*Dataset*/
+.data-1 h1{
+  color: #FFFFFF;
+  text-align: center;
+  background-color: #011c39 ;
+}
+.data-1 img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+  height: 25%;
+}
+
+
+
+/*Chart*/
+.vis_chart{text-align: center;}
+
+.vis_topic{
+    text-align: center;
+}
+
+.vis_description{
+    padding-left: 20%;
+    padding-right: 20%;
+    font-size: 19px;
+}
+
+.vis_topic button{
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.vis_topic button:hover{
+    background-color: black;
+    color: white;
+}
+
+.vis_topic .button_active{
+    background-color: black;
+    color: white;
+}
+
+/*Pie*/
+.inside{
+    font-size:18px;
+    font-weight: bold;
+    fill: white;
+}
+.label{
+    font-size:18px;
+    font-weight: bold;
+}
+
+/*Line*/
+.axis path{
+    stroke:black;
+    stroke-width:2px ;
+}
+.axis line{
+    stroke: black;
+    stroke-width: 1.5px;
+}
+.axis text{
+    fill: black;
+    font-weight: bold;
+    font-size: 14px;
+    font-family:"Arial Black", Gadget, sans-serif;
+}
+.legend text{
+    fill:  black;
+    font-family:"Arial Black", Gadget, sans-serif;
+}
