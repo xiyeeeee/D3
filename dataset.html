@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,68 +10,54 @@
     <script src="https://d3js.org/colorbrewer.v1.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <header>
 
-    <nav>
+<body id="sarawakbg">
+  <div class="content-wrapper">
+    <header>
+      <h1>Sarawak Tourism Analysis (2017-2021)</h1>
+      <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="dataset.html">Dataset</a></li>
-            <li><a href="#">Visualizations</a>
-                <ul>
-                  <li><a href="mentalillness.html">Types of Mental Illness</a></li>
-                  <li><a href="ageGroup.html">Age Group</a></li>
-                  <li><a href="gender.html">Genders</a></li>
-                  <li><a href="salaryGroup.html">Salary Group</a></li>
-                  <li><a href="educationBackground.html">Education Background</a></li>
-                  <li><a href="suicideRates.html">Suicide Rates</a></li>
-                  <li><a href="continentIllness.html">Continent</a></li>
-                  <li><a href="race.html">Race/Ethnicity</a></li>
-                </ul>
+            <li class="dropdown">
+                <a href="#">Visualizations</a>
+                <div class="dropdown-content">
+                    <a href="#">Contribution to Yearly Total</a>
+                    <a href="#">Citizenship Over Time</a>
+                    <a href="#">COVID-19 Impact Analysis</a>
+                </div>
             </li>
-            <li><a href="#">Profile</a>
-                <ul>
-                    <li><a href="peter.html">Peter</a></li>
-                    <li><a href="yc.html">Yen Chiong</a></li>
-                </ul>
-            </li>
+            <li><a href="profile.html">Profile</a></li>
         </ul>
     </nav>
-</header>
-<section class = "data-1">
+    </header>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+      <main class="dataset-container">
+          <h1>Dataset Used for the Visualizations</h1>
+  
+          <figure>
+              <img src="img/download.jpg" alt="CSV File" class="data-image">
+          </figure>
+  
+          <ul class="dataset-list">
+              <li><a href="dataset/Sarawak_Visitor_Arrivals_2017.csv">Sarawak Visitor Arrivals 2017</a></li>
+              <li><a href="dataset/Sarawak_Visitor_Arrivals_2018.csv">Sarawak Visitor Arrivals 2018</a></li>
+              <li><a href="dataset/Sarawak_Visitor_Arrivals_2019.csv">Sarawak Visitor Arrivals 2019</a></li>
+              <li><a href="dataset/Sarawak_Visitor_Arrivals_2020.csv">Sarawak Visitor Arrivals 2020</a></li>
+              <li><a href="dataset/Sarawak_Visitor_Arrivals_2021.csv">Sarawak Visitor Arrivals 2021</a></li>
+          </ul>
+      </main>
+</div> <!-- end content-wrapper -->
+  
 
-  <h1>Dataset used for data visualizations</h1>
-  <img src="images/file.JPG" alt="CSV File">
-  <p>
-    <a href="dataset/age.csv">Age Group dataset</a>
-  </p>
-  <p>
-    <a href="dataset/continentIllness.csv">Continent Mental Illness dataset</a>
-  </p>
-  <p>
-    <a href="dataset/education_b.csv">Education Background dataset</a>
-  </p>
-  <p>
-    <a href="dataset/genderYears.csv">Gender dataset</a>
-  </p>
-  <p>
-    <a href="dataset/illnessRate.csv">Type of Mental Illness dataset</a>
-  </p>
-  <p>
-    <a href="dataset/Race.csv">Race/Ethnicity dataset</a>
-  </p>
-  <p>
-    <a href="dataset/salary.csv">Salary Group dataset</a>
-  </p>
-  <p>
-    <a href="dataset/suicide.csv">Suicide Rate dataset</a>
-  </p>
-
-</section>
-
-
-<br>
-<br>
+    <footer>
+      <p>© 2023 Sarawak Tourism Analysis Project. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>

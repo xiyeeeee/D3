@@ -1,266 +1,336 @@
-/*HTML*/
-nav{
-    float: center;
-    margin-right: 5px;
-    margin-top: 15px;
-    position: relative;
-    z-index: 1;
+
+/* Background Images */
+#indexbg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/index.jpg');
+    background-size: cover;
 }
 
-nav ul li{
-    background-color: #2e6e89;
-    display: inline-block;
-    border-radius: 30px;
-    text-align: center;
-    padding: 12px 0px;
-    width: 170px;
-    font-size: 11px;
-    font-family: Arial, Helvetica, sans-serif;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 2px;
-    position: relative;
-    box-shadow: 0 5px 12px rgba(32,32,32,.3);
+#sarawakbg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/sarawak.jpg');
+    background-size: cover;
 }
 
-nav ul li a{
-    color: #ffffff;
+#profilebg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/profilebg.jpg');
+    background-size: cover;
 }
 
-
-nav ul li:hover{
-    background-color: #0f4275;
-    color: #011c39;
+/* General Styles */
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    color: #2c3e50;
+    transition: all 0.3s ease;
 }
 
-
-nav ul ul{
-    display: none;
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
 }
 
-nav ul li:hover>ul{
-    display: block;
-    position: absolute;
-}
-
-nav ul li:hover>ul li:nth-child(1){
-    margin-top: 20px;
-    margin-bottom: 2px;
-}
-
-nav ul li:hover>ul li:nth-child(2),ul li:nth-child(3),ul li:nth-child(4),ul li:nth-child(5),ul li:nth-child(6),ul li:nth-child(7){
-    margin: 2px;
-}
-
-.about-1{
-    height: 100vh;
-    background-color: #FFFFFF;
-}
-
-.home-1 h3{
-  color: #FFFFFF;
-  text-align: center;
-  background-color: #2e6e89 ;
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
 }
 
 img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 25%;
-  height: 25%;
+    max-width: 100%;
+    height: auto;
 }
 
-/* About */
-.about-1{
-    height: 100vh;
+/* Header and Navigation Styles */
+header {
+    background: linear-gradient(45deg, #2c3e50, #4a688f);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Ensure it's above all other content */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     text-align: center;
-    background-color: #FFFFFF;
-}
-.about-1 h1{
-  color: #FFFFFF;
-  text-align: center;
-  background-color: #011c39 ;
 }
 
-.personal_information{
-    width: 65vw;
-    height: 80vh;
-    margin-left: 30%;
-    margin-right: 25%;
-    margin-top: 50px;
-    padding-top: 10px;
+header h1 {
+    color: #ecf0f1;
+    margin-bottom: 10px; /* Space between title and nav items */
+    font-size: 1.5em;    /* Adjust based on preference */
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 30px;
+}
+
+nav ul li:last-child {
+    margin-right: 0; /* No right margin for the last item */
+}
+
+nav ul li a {
+    color: #ecf0f1;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #ffffff;
+    color: #2c3e50;
+}
+
+
+/* Main Content Styles */
+main {
     display: flex;
     flex-direction: column;
-    border-top-right-radius: 50px;
-    border-bottom-left-radius: 50px;
-    background-color: #011c39;
-    box-shadow: 0 5px 12px rgba(32,32,32,.3);
+    align-items: center; /* centers children horizontally */
+    justify-content: center; /* centers children vertically */
 }
 
-.about-1 img{
-    float: left;
-    border-style: groove;
+.main-content {
+    background-color: #ffffff;
     padding: 20px;
-    background-color: #011c39;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    margin-left: auto;
-    margin-top: auto;
-    box-shadow: 0 5px 12px rgba(32,32,32,.3);
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
-.about-1 p{
-    padding: 10px;
-    color: #F0F8FF;
+/* Footer Styles */
+html, body {
+    height: 100%; /* Make sure the body takes full viewport height */
 }
 
-.about-1 .info-name{
-    font-weight: bold;
-    font-size: 200%;
+.content-wrapper {
+    min-height: 100%; 
+    margin-bottom: -60px; /* assuming footer height is 60px */
+    padding-bottom: 60px; /* match footer height so the content doesn't overlap the footer */
 }
 
-.about-1 .info-studentno{
-    font-family: Arial, sans-serif;
+footer {
+    height: 60px; /* adjust to your footer's actual height */
+    padding: 10px 0;
+    background-color: #2c3e50;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    color: #ecf0f1;
 }
 
-.about-1 .info-course{
-    color: rgb(255, 255, 255);
-}
-
-.about-1 .ques{
-    font-family:  Courier New, monospace;
-}
-
-.about-2{
-    height: 80vh;
-    background-color: #FFFFFF;
-}
-
-.extra-details{
-    height: 70vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.extra-details h2{
+/* Dataset.html Styles */
+.dataset-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0.8;
+    border-radius: 8px;
     text-align: center;
     font-size: 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding-top: 40px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    padding-left: 30px;
-    padding-right: 30px;
 }
 
-.extra-details P{
-    text-align: center;
-    padding-top: 30px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    line-height: 30px;
-    padding-left: 30px;
-    padding-right: 30px;
-    font-size: 13px;
+.data-image {
+    max-width: 50%; /* This will make the image 50% of its container's width */
+    display: block;
+    margin: 20px auto;
+    transition: transform 0.3s; /* smooth transition for hover effect */
 }
 
-.demographic, .hobbies, .hometown{
-    height: 50vh;
-    width: 30%;
+.data-image:hover {
+    transform: scale(1.1); /* This will enlarge the image by 10% when hovered */
 }
 
-.demographic{
-    border-right: 2px solid #011c39;
+.dataset-list {
+    list-style-type: none;
+    padding: 0;
 }
 
-.hobbies{
-    border-left: 2px solid #011c39;
-}
-
-/*Dataset*/
-.data-1 h1{
-  color: #FFFFFF;
-  text-align: center;
-  background-color: #011c39 ;
-}
-.data-1 img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 25%;
-  height: 25%;
-}
-
-
-
-/*Chart*/
-.vis_chart{text-align: center;}
-
-.vis_topic{
+.dataset-list li {
+    border-bottom: 3px solid grey;
+    padding: 10px 0;
     text-align: center;
 }
 
-.vis_description{
-    padding-left: 20%;
-    padding-right: 20%;
-    font-size: 19px;
+.dataset-list li:last-child {
+    border-bottom: none;
 }
 
-.vis_topic button{
-    background-color: white;
-    border: 2px solid black;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
+.dataset-list a {
     text-decoration: none;
+    color: #0077cc;
+    transition: color 0.3s;
+}
+
+.dataset-list a:hover {
+    color: #0055aa;
+}
+
+/* Profile.html */
+.profile-container {
+    display: flex; 
+    align-items: center; /* Centers content vertically */
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    width: 55%;
+    height: 400px;
+    margin: 20px auto;
+    opacity: 0.8;
+}
+
+
+.profile-image {
+    float: left;
+    width: 350px;
+    margin-right: 20px;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.right-float {
+    float: right;
+    margin-left: 50px;
+}
+
+.profile-description {
+    font-family: 'Comic Sans MS', sans-serif; /* For a fancier font, just as an example */
+    font-size: 18px;
+    
+}
+
+.clear {
+    clear: both;
+}
+
+/* Home Page */
+/* Visualization Section Styles */
+.visualization {
+    background-color: whitesmoke;
+    margin: 30px 0;
+    padding: 20px 40px; 
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s; 
+    width: 60%;
+    margin-left: auto; /* these two lines are important */
+    margin-right: auto;
+    text-align: center;
+}
+
+.visualization:hover {
+    transform: translateY(-5px); 
+}
+
+.visualization h2 {
+    color: #2c3e50;
+    font-size: 24px;
+    border-bottom: 2px solid #2c3e50;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.visualization p {
+    color: #7f8c8d;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.viz-holder {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Button Styles */
+.visualization .viz-button {
     display: inline-block;
+    padding: 15px 30px;
     font-size: 16px;
-    font-weight: bold;
-    margin: 4px 2px;
+    font-family: 'Lato', sans-serif;
+    border: none;
+    border-radius: 5px;
+    background-color: #2c3e50; 
+    color: #ecf0f1;
+    text-align: center;
+    text-decoration: none; 
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
     cursor: pointer;
-    transition-duration: 0.4s;
 }
 
-.vis_topic button:hover{
-    background-color: black;
-    color: white;
+.visualization .viz-button:hover {
+    background-color: #34495e;
+    transform: translateY(-3px);
 }
 
-.vis_topic .button_active{
-    background-color: black;
-    color: white;
+.visualization .viz-button:active {
+    transform: translateY(0);
 }
 
-/*Pie*/
-.inside{
-    font-size:18px;
-    font-weight: bold;
-    fill: white;
-}
-.label{
-    font-size:18px;
-    font-weight: bold;
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
 
-/*Line*/
-.axis path{
-    stroke:black;
-    stroke-width:2px ;
+.dropdown > a:before {
+    content: '\25BC';  /* Down-pointing triangle symbol */
+    margin-left: 8px;  /* Space between text and symbol */
+    transition: all 0.3s;  /* Smooth transition for hover effect */
+    color: #ecf0f1;  /* Adjust to match navbar text color */
 }
-.axis line{
-    stroke: black;
-    stroke-width: 1.5px;
+
+.dropdown:hover > a:before {
+    transform: translateY(5px);  /* Move triangle symbol slightly downwards on hover */
 }
-.axis text{
-    fill: black;
-    font-weight: bold;
-    font-size: 14px;
-    font-family:"Arial Black", Gadget, sans-serif;
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #2c3e50;  /* Adjust to match navbar color */
+    border: 1px solid #34495e;  /* Border for visual distinction */
+    border-radius: 5px;  /* Rounded corners */
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: 10px;  /* Gap from the main menu */
+    opacity: 0.95;  /* Slight transparency */
+    transition: all 0.3s;  /* Smooth show effect */
 }
-.legend text{
-    fill:  black;
-    font-family:"Arial Black", Gadget, sans-serif;
+
+.dropdown-content a {
+    color: #ecf0f1;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid rgba(236, 240, 241, 0.1);  /* Subtle line between items */
 }
+
+.dropdown-content a:last-child {
+    border-bottom: none;  /* Remove border for the last item */
+}
+
+.dropdown-content a:hover {
+    background-color: #1abc9c;  /* Turquoise, a complementary color */
+    color: #2c3e50;  /* Adjusting text color for contrast */
+    transform: scale(1.05);  /* Slight increase in size for a popping effect */
+}
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+
