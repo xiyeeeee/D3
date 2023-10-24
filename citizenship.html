@@ -9,9 +9,10 @@
     <script src="http://d3js.org/d3.v6.min.js"></script>
     <script src="https://d3js.org/colorbrewer.v1.min.js"></script>
     <link rel="stylesheet" href="style.css">
+    <script src="script/citizenship2017.js"></script>
 </head>
 
-<body id="indexbg">
+<body id="indexb">
     <div class="content-wrapper">
         <header>
             <h1>Sarawak Tourism Analysis (2017-2021)</h1>
@@ -36,11 +37,137 @@
         <br>
         <br>
         <br>
-        <h2></h2>         
+        <br>
+        <h2>Citizenship Over Time</h2>
+
+        <div class="button-container">
+            <!-- Yearly Data Buttons -->
+            <button onclick="loadData(2017, 'Grand Total')">2017</button>
+            <button onclick="loadData(2018, 'Grand Total')">2018</button>
+            <button onclick="loadData(2019, 'Grand Total')">2019</button>
+            <button onclick="loadData(2020, 'Grand Total')">2020</button>
+            <button onclick="loadData(2021, 'Grand Total')">2021</button>
+    
+            <!-- Monthly Data Buttons -->
+            <button onclick="loadData(currentYear, 'January')">January</button>
+            <button onclick="loadData(currentYear, 'February')">February</button>
+            <button onclick="loadData(currentYear, 'March')">March</button>
+            <button onclick="loadData(currentYear, 'April')">April</button>
+            <button onclick="loadData(currentYear, 'May')">May</button>
+            <button onclick="loadData(currentYear, 'June')">June</button>
+            <button onclick="loadData(currentYear, 'July')">July</button>
+            <button onclick="loadData(currentYear, 'August')">August</button>
+            <button onclick="loadData(currentYear, 'September')">September</button>
+            <button onclick="loadData(currentYear, 'October')">October</button>
+            <button onclick="loadData(currentYear, 'November')">November</button>
+            <button onclick="loadData(currentYear, 'December')">December</button>
+    
+            <button onclick="loadTotalData()">Total</button>
+            <button onclick="window.print()">Print Visualization</button>
+    
+            <!-- Zoom buttons -->
+            <div class="zoom-buttons">
+                <button onclick="zoom('in')">Zoom In</button>
+                <button onclick="zoom('out')">Zoom Out</button>
+            </div>
+        </div>
+
+        <div id="world-map"></div>        
     </div> <!-- end content-wrapper -->
 <footer>
     <p>© 2023 Sarawak Tourism Analysis Project. All rights reserved.</p>
 </footer>
+
+<script>
+    const width = 1200, height = 600;
+    const svg = d3.select("#world-map").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+    const projection = d3.geoNaturalEarth1()
+        .scale(width / 2 / Math.PI)
+        .translate([width / 2, height / 2]);
+    const path = d3.geoPath().projection(projection);
+
+    // Adding a 'g' element to group the countries
+    const g = svg.append("g");
+
+    let currentData; // Store currently loaded data
+    let currentMonth = 'Grand Total'; // Default to Grand Total
+
+
+    function loadData(year, month = 'Grand Total') {
+        d3.csv(`dataset/Sarawak_Visitor_Arrivals_${year}.csv`).then(data => {
+            currentData = data; // Update currentData
+            currentMonth = month; // Update currentMonth
+            renderMap(data, month);
+        });
+    }
+
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+    const colorScale = d3.scaleSequential(d3.interpolateBlues).domain([1, 10000]); 
+
+    function renderMap(data, month) {
+        d3.json("world.json").then(world => {
+            if (!world.features) {
+                console.error("No features found in the GeoJSON. Check its structure.");
+                return;
+            }
+
+            world.features.forEach(feature => {
+                const country = feature.properties.name;
+                const match = data.find(d => d.Citizenship === country);
+                feature.properties.visitors = match ? match[month] : 0; 
+            });
+
+            g.selectAll("path").remove();
+
+             g.selectAll("path")
+                .data(world.features)
+                .enter().append("path")
+                .attr("d", path)
+                .attr("fill", d => d.properties.visitors > 0 ? colorScale(d.properties.visitors) : "grey")
+                        .attr("stroke", "#fff")
+                .on("mouseover", function(event, d) {
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    tooltip.html(d.properties.name + "<br/>" + (d.properties.visitors || "No data"))
+                        .style("left", (event.pageX) + "px")
+                        .style("top", (event.pageY - 28) + "px");
+                })
+                .on("mouseout", function(d) {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                });
+        }).catch(error => console.error("GeoJSON Error:", error));
+    }
+
+    const zoomBehavior = d3.zoom()
+            .scaleExtent([1, 5])
+            .on("zoom", (event) => {
+                g.attr('transform', event.transform);  // Apply the zoom behavior to the group, not the entire SVG
+            });
+
+        svg.call(zoomBehavior);
+
+        function zoom(action) {
+            const currentZoom = svg.node().__zoom.k;
+            if (action === 'in') {
+                svg.transition().duration(500).call(zoomBehavior.scaleTo, currentZoom * 1.5);
+            } else if (action === 'out') {
+                svg.transition().duration(500).call(zoomBehavior.scaleTo, currentZoom / 1.5);
+            }
+        }
+
+    // Load the 2017 data by default when the page loads
+    window.onload = function() {
+        loadData(2017);
+    }
+</script>
 
 </body>
 </html>
