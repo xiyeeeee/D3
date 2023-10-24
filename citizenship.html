@@ -9,7 +9,6 @@
     <script src="http://d3js.org/d3.v6.min.js"></script>
     <script src="https://d3js.org/colorbrewer.v1.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <script src="script/citizenship2017.js"></script>
 </head>
 
 <body id="indexb">
@@ -42,29 +41,28 @@
 
         <div class="button-container">
             <!-- Yearly Data Buttons -->
-            <button onclick="loadData(2017, 'Grand Total')">2017</button>
-            <button onclick="loadData(2018, 'Grand Total')">2018</button>
-            <button onclick="loadData(2019, 'Grand Total')">2019</button>
-            <button onclick="loadData(2020, 'Grand Total')">2020</button>
-            <button onclick="loadData(2021, 'Grand Total')">2021</button>
-    
+            <div class="yearly-buttons">
+                <button data-year="2017" onclick="loadData(2017, 'Grand Total')">2017</button>
+                <button data-year="2018" onclick="loadData(2018, 'Grand Total')">2018</button>
+                <button data-year="2019" onclick="loadData(2019, 'Grand Total')">2019</button>
+                <button data-year="2020" onclick="loadData(2020, 'Grand Total')">2020</button>
+                <button data-year="2021" onclick="loadData(2021, 'Grand Total')">2021</button>
+            </div>
             <!-- Monthly Data Buttons -->
-            <button onclick="loadData(currentYear, 'January')">January</button>
-            <button onclick="loadData(currentYear, 'February')">February</button>
-            <button onclick="loadData(currentYear, 'March')">March</button>
-            <button onclick="loadData(currentYear, 'April')">April</button>
-            <button onclick="loadData(currentYear, 'May')">May</button>
-            <button onclick="loadData(currentYear, 'June')">June</button>
-            <button onclick="loadData(currentYear, 'July')">July</button>
-            <button onclick="loadData(currentYear, 'August')">August</button>
-            <button onclick="loadData(currentYear, 'September')">September</button>
-            <button onclick="loadData(currentYear, 'October')">October</button>
-            <button onclick="loadData(currentYear, 'November')">November</button>
-            <button onclick="loadData(currentYear, 'December')">December</button>
-    
-            <button onclick="loadTotalData()">Total</button>
-            <button onclick="window.print()">Print Visualization</button>
-    
+            <div class="monthly-buttons">
+                <button data-month="January" onclick="loadMonthData('January')">January</button>
+                <button data-month="February" onclick="loadMonthData('February')">February</button>
+                <button data-month="March" onclick="loadMonthData('March')">March</button>
+                <button data-month="April" onclick="loadMonthData('April')">April</button>
+                <button data-month="May" onclick="loadMonthData('May')">May</button>
+                <button data-month="June" onclick="loadMonthData('June')">June</button>
+                <button data-month="July" onclick="loadMonthData('July')">July</button>
+                <button data-month="August" onclick="loadMonthData('August')">August</button>
+                <button data-month="September" onclick="loadMonthData('September')">September</button>
+                <button data-month="October" onclick="loadMonthData('October')">October</button>
+                <button data-month="November" onclick="loadMonthData('November')">November</button>
+                <button data-month="December" onclick="loadMonthData('December')">December</button>
+            </div>            
             <!-- Zoom buttons -->
             <div class="zoom-buttons">
                 <button onclick="zoom('in')">Zoom In</button>
@@ -72,7 +70,8 @@
             </div>
         </div>
 
-        <div id="world-map"></div>        
+        <div id="world-map"></div>
+        <figcaption id="data-caption"></figcaption>        
     </div> <!-- end content-wrapper -->
 <footer>
     <p>© 2023 Sarawak Tourism Analysis Project. All rights reserved.</p>
@@ -88,28 +87,60 @@
         .translate([width / 2, height / 2]);
     const path = d3.geoPath().projection(projection);
 
-    // Adding a 'g' element to group the countries
     const g = svg.append("g");
 
-    let currentData; // Store currently loaded data
-    let currentMonth = 'Grand Total'; // Default to Grand Total
+    let currentData; 
+    let currentYear = 2017;
+    let currentMonth = 'January'; 
 
+    function updateCaption(year, month) {
+        document.getElementById("data-caption").innerText = `Citizenship Over Time for Year ${year}, Month ${month}`;
+    }
 
-    function loadData(year, month = 'Grand Total') {
-        d3.csv(`dataset/Sarawak_Visitor_Arrivals_${year}.csv`).then(data => {
-            currentData = data; // Update currentData
-            currentMonth = month; // Update currentMonth
-            renderMap(data, month);
+    function loadData(year, month = 'January') {
+        currentYear = year;
+        console.log("Loading year:", currentYear);  // Log which year is being loaded
+        loadMonthData(month);
+    }
+
+    function loadMonthData(month) {
+        d3.csv(`dataset/Sarawak_Visitor_Arrivals_${currentYear}.csv`)
+        .then(data => {
+            console.log("Data loaded for year " + currentYear + ":", data);
+            currentData = data;
+            currentMonth = month;
+
+            renderMap(currentData, month);
+            updateCaption(currentYear, month);
+        })
+        .catch(error => {
+            console.error("Error loading the CSV for year " + currentYear + ":", error);
         });
+
+        updateActiveButtons(currentYear, month);
+    }
+
+
+    function updateActiveButtons(year, month) {
+        // Remove active class from all buttons first
+        document.querySelectorAll('.yearly-buttons button, .monthly-buttons button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        // Add active class to the currently clicked year and month
+        document.querySelector(`.yearly-buttons button[data-year="${year}"]`).classList.add('active');
+        document.querySelector(`.monthly-buttons button[data-month="${month}"]`).classList.add('active');
     }
 
     const tooltip = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
 
-    const colorScale = d3.scaleSequential(d3.interpolateBlues).domain([1, 10000]); 
-
     function renderMap(data, month) {
+        const maxVisitors = d3.max(data, d => +d[month]);
+        console.log("Max visitors for", month, ":", maxVisitors);  // Log max visitors
+        const colorScale = d3.scaleSequential(d3.interpolateBlues).domain([1, maxVisitors]);
+
         d3.json("world.json").then(world => {
             if (!world.features) {
                 console.error("No features found in the GeoJSON. Check its structure.");
@@ -119,17 +150,17 @@
             world.features.forEach(feature => {
                 const country = feature.properties.name;
                 const match = data.find(d => d.Citizenship === country);
-                feature.properties.visitors = match ? match[month] : 0; 
+                feature.properties.visitors = match ? +match[month] : 0; 
             });
 
             g.selectAll("path").remove();
 
-             g.selectAll("path")
+            g.selectAll("path")
                 .data(world.features)
                 .enter().append("path")
                 .attr("d", path)
                 .attr("fill", d => d.properties.visitors > 0 ? colorScale(d.properties.visitors) : "grey")
-                        .attr("stroke", "#fff")
+                .attr("stroke", "#fff")
                 .on("mouseover", function(event, d) {
                     tooltip.transition()
                         .duration(200)
@@ -147,27 +178,27 @@
     }
 
     const zoomBehavior = d3.zoom()
-            .scaleExtent([1, 5])
-            .on("zoom", (event) => {
-                g.attr('transform', event.transform);  // Apply the zoom behavior to the group, not the entire SVG
-            });
+        .scaleExtent([1, 5])
+        .on("zoom", (event) => {
+            g.attr('transform', event.transform);
+        });
 
-        svg.call(zoomBehavior);
+    svg.call(zoomBehavior);
 
-        function zoom(action) {
-            const currentZoom = svg.node().__zoom.k;
-            if (action === 'in') {
-                svg.transition().duration(500).call(zoomBehavior.scaleTo, currentZoom * 1.5);
-            } else if (action === 'out') {
-                svg.transition().duration(500).call(zoomBehavior.scaleTo, currentZoom / 1.5);
-            }
+    function zoom(action) {
+        const currentZoom = svg.node().__zoom.k;
+        if (action === 'in') {
+            svg.transition().duration(500).call(zoomBehavior.scaleTo, currentZoom * 1.5);
+        } else if (action === 'out') {
+            svg.transition().duration(500).call(zoomBehavior.scaleTo, currentZoom / 1.5);
         }
+    }
 
-    // Load the 2017 data by default when the page loads
     window.onload = function() {
-        loadData(2017);
+        loadData(2017, 'January');
     }
 </script>
+
 
 </body>
 </html>
