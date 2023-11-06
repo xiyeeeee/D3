@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Citizenship Over Time</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -30,9 +31,9 @@
         </header>
         <br><br><br><br><br><br>
         <h2>Citizenship Over Time</h2>
-        
+
         <figcaption id="data-caption"></figcaption>
- 
+
         <div class="button-container">
             <!-- Yearly Data Buttons -->
             <div class="yearly-buttons">
@@ -63,14 +64,17 @@
             </div>
         </div>
 
+        <!-- Add CSS classes to the bubble elements -->
         <div class="centered-container">
             <div id="bubble-chart-container">
-                <div class="tooltip">
-                    <div class="tooltip-text">Tooltip Text</div>
+                <!-- Add a sidebar for displaying bubble data -->
+                <div class="bubble-sidebar">
+                    <h3>Country Information</h3>
+                    <p id="country-name">Country: N/A</p>
+                    <p id="visitors-count">Visitors: 0</p>
                 </div>
             </div>
         </div>
-        
 
         <div class="legend">
             <h3>Color Legend</h3>
@@ -85,8 +89,7 @@
                 <text x="20" y="45" dy="1em">Less</text>
                 <text x="280" y="45" text-anchor="end" dy="1em">More</text>
             </svg>
-        </div>        
-        
+        </div>
     </div>
 
     <!-- <footer>

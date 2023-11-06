@@ -374,23 +374,39 @@ button.active {
     align-items: center;
 }
 
-/* Style for the tooltip container */
-.tooltip {
+/* Tooltip Container Styles */
+.tooltip-container {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 5px;
-    border-radius: 3px;
-    font-size: 12px;
-    pointer-events: none; /* Prevent the tooltip from blocking mouse events */
-    opacity: 0; /* Initially hidden */
-    z-index: 1; /* Ensure the tooltip is above other elements */
-    border: 1px solid red; 
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    display: none; /* Initially hide the tooltip */
 }
 
-/* Style for the tooltip text */
-.tooltip-text {
-    font-size: 12px;
+.tooltip-container h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.tooltip-container p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.bubble:hover {
+    border-color: yellow; /* Change to your desired border color */
+}
+
+/* CSS for the bubbles' border color change */
+.bubble {
+    transition: stroke 0.3s; /* Add a smooth transition effect to the border color change */
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 
