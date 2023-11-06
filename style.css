@@ -374,19 +374,68 @@ button.active {
     align-items: center;
 }
 
+/* Style for the tooltip container */
 .tooltip {
     position: absolute;
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-    font-size: 14px;
-    pointer-events: none; /* This ensures the tooltip doesn't interfere with mouse events. */
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+    pointer-events: none; /* Prevent the tooltip from blocking mouse events */
+    opacity: 0; /* Initially hidden */
+    z-index: 1; /* Ensure the tooltip is above other elements */
+    border: 1px solid red; 
 }
+
+/* Style for the tooltip text */
+.tooltip-text {
+    font-size: 12px;
+}
+
 
 figcaption {
     color: #2E7D32; /* Change the caption color to match the active button */
     font-weight: bold; /* Make the caption bold for emphasis */
 }
+
+/* Style the legend container */
+.legend {
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    width: 300px;
+}
+
+/* Style the legend title */
+.legend h3 {
+    font-size: 18px;
+    margin: 5px 0;
+    color: #333;
+}
+
+/* Style the color gradient rectangle */
+.legend svg rect {
+    fill: url(#legend-gradient);
+    stroke: #ccc;
+    stroke-width: 1px;
+}
+
+/* Style the text labels */
+.legend text {
+    font-size: 14px;
+    fill: #333;
+}
+
+/* Style the legend border */
+.legend svg {
+    border: none; 
+}
+
+
+
 

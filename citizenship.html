@@ -32,7 +32,7 @@
         <h2>Citizenship Over Time</h2>
         
         <figcaption id="data-caption"></figcaption>
-        
+ 
         <div class="button-container">
             <!-- Yearly Data Buttons -->
             <div class="yearly-buttons">
@@ -64,14 +64,34 @@
         </div>
 
         <div class="centered-container">
-            <div id="bubble-chart-container"></div>
+            <div id="bubble-chart-container">
+                <div class="tooltip">
+                    <div class="tooltip-text">Tooltip Text</div>
+                </div>
+            </div>
         </div>
+        
 
+        <div class="legend">
+            <h3>Color Legend</h3>
+            <svg width="800" height="60">
+                <defs>
+                    <linearGradient id="legend-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color: lightblue" />
+                        <stop offset="100%" style="stop-color: darkblue" />
+                    </linearGradient>
+                </defs>
+                <rect width="260" height="20" fill="url(#legend-gradient)" x="20" y="20" />
+                <text x="20" y="45" dy="1em">Less</text>
+                <text x="280" y="45" text-anchor="end" dy="1em">More</text>
+            </svg>
+        </div>        
+        
     </div>
 
-    <footer>
+    <!-- <footer>
         <p>© 2023 Sarawak Tourism Analysis Project. All rights reserved.</p>
-    </footer>
+    </footer> -->
 
     <script src="script/bubblechart.js"></script>
 </body>
