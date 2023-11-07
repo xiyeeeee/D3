@@ -12,6 +12,7 @@ const colorScale = d3.scaleOrdinal(d3.schemeCategory10); // You can use any othe
 const tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
+    
 
 let labels = d3.select(null); // Define an empty selection
 

@@ -374,7 +374,7 @@ button.active {
     align-items: center;
 }
 
-/* Style for the tooltip container */
+/*Style for the tooltip container */
 .tooltip {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.7);
@@ -383,12 +383,12 @@ button.active {
     border-radius: 3px;
     font-size: 12px;
     pointer-events: none; /* Prevent the tooltip from blocking mouse events */
-    opacity: 0; /* Initially hidden */
+   opacity: 0; /* Initially hidden */
     z-index: 1; /* Ensure the tooltip is above other elements */
     border: 1px solid red; 
 }
 
-/* Style for the tooltip text */
+Style for the tooltip text 
 .tooltip-text {
     font-size: 12px;
 }

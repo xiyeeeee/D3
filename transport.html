@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="transport.css">
+   
+</head>
+
+<body >
+    <div class="content-wrapper">
+        <header>
+            <h1>Sarawak Tourism Analysis (2017-2021)</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dataset.html">Dataset</a></li>
+                    <li class="dropdown">
+                        <a href="#">Visualizations</a>
+                        <div class="dropdown-content">
+                            <a href="transport.html">Mode of transport</a>
+                            <a href="citizenship.html">Citizenship Over Time</a>
+                            <a href="covid.html">COVID-19 Impact Analysis</a>
+                        </div>
+                    </li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <main>
+            <div class="yearly-buttons">
+                <button id="opt1_a" class="active">2017</button>
+                <button id="opt2_a">2018</button>
+                <button id="opt3_a">2019</button>
+                <button id="opt4_a">2020</button>
+                <button id="opt5_a">2021</button>
+            </div>
+            <div id="container"></div>
+        </main>
+        <script src="script/transport.js"></script>
+    </div> <!-- end content-wrapper -->
+    <footer>
+        <p>© 2023 Sarawak Tourism Analysis Project. All rights reserved.</p>
+    </footer>
+
+    <script>
+      
+    </script>
+
+</body>
+
+</html>
