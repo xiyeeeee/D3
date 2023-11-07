@@ -61,40 +61,45 @@ d3.csv("./dataset/Transport.csv", (res) => {
         });
 });
 
-// Function to update the chart based on the selected year's data
 function updateChart(data) {
     // Remove any existing pie charts in the SVG
     svg.selectAll(".pie").remove();
 
+    // Define a smaller width and height for the SVG container
+    const smallerWidth = 600;
+    const smallerHeight = 600;
+
     // Append a group for the pie chart and add title and total text
-  
-svg.append("g")
-.attr("class", "pie")
-.attr("transform", `translate(10,30)`)
-.call(g => {
-    g.append("text")
-        .text(`Arrivals by Mode of Transport into Sarawak (${selectedYear})`)
-        .attr("font-size", "32px") // Set the font size to make it larger
-        .attr("fill", "#3A465C"); // Set the fill (color) to dark blue-grey
-    g.append("text")
-        .attr("y", 22)
-        .text(`Grand Total: (${d3.sum(data, d => +d.value)})`);
-});
+    svg.append("g")
+        .attr("class", "pie")
+        .attr("transform", `translate(10,50)`) // Adjust the vertical position
+        .call(g => {
+            g.append("text")
+                .text(`Arrivals by Mode of Transport into Sarawak (${selectedYear})`)
+                .attr("font-size", "28px") // Set the font size
+                .attr("fill", "#3A465C"); // Set the fill (color) to dark blue-grey
+            g.append("text")
+                .attr("y", 22)
+                .text(`Grand Total: (${d3.sum(data, d => +d.value)})`);
+        });
 
     // Generate pie chart data using D3's pie function
     let pieData = d3.pie()
         .value(d => d.value)
         .sort(null)(data);
 
-    // Define the arc generator for the pie chart
+    // Define a smaller outer radius for the pie chart
+    const smallerOuterRadius = 150;
+
+    // Define the arc generator with the smaller outer radius
     let arc = d3.arc()
         .innerRadius(0)
-        .outerRadius(150);
+        .outerRadius(smallerOuterRadius); // Use the smaller outer radius
 
-    // Append paths to create the pie chart slices
+    // Append paths to create the smaller pie chart slices
     svg.append("g")
         .attr("class", "pie")
-        .attr("transform", `translate(${width / 2}, ${height / 2})`)
+        .attr("transform", `translate(${smallerWidth / 2}, ${smallerHeight / 2})`) // Center the chart
         .selectAll("path")
         .data(pieData)
         .enter()
@@ -105,21 +110,20 @@ svg.append("g")
         });
 
     // Update the arc generator for the inner labels
-    arc.innerRadius(80)
-        .outerRadius(80);
+    arc.innerRadius(smallerOuterRadius - 50); // Adjust the inner radius for the labels
 
-    // Append text labels inside the pie chart slices
+    // Append text labels inside the smaller pie chart slices
     svg.append("g")
         .attr("text-anchor", "middle")
-        .attr("font-size", 16)
+        .attr("font-size", 14) // Adjust the font size
         .attr("fill", "black")
         .attr("class", "pie")
-        .attr("transform", `translate(${width / 2}, ${height / 2})`)
+        .attr("transform", `translate(${smallerWidth / 2}, ${smallerHeight / 2})`) // Center the labels
         .selectAll("text")
         .data(pieData)
         .enter()
         .append("text")
         .attr("x", d => arc.centroid(d)[0])
         .attr("y", d => arc.centroid(d)[1])
-        .text(d => d.value);
+        .text(d => `${d.data.value}\n${d.data.growth}`);
 }
