@@ -1,0 +1,190 @@
+/* Background Images */
+#indexbg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/index.jpg');
+    background-size: cover;
+}
+
+#sarawakbg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/sarawak.jpg');
+    background-size: cover;
+}
+
+#profilebg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/profilebg.jpg');
+    background-size: cover;
+}
+
+/* General Styles */
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Header and Navigation Styles */
+header {
+    background: linear-gradient(45deg, #2c3e50, #4a688f);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Ensure it's above all other content */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    color: #ecf0f1;
+    margin-bottom: 10px; /* Space between title and nav items */
+    font-size: 1.5em;    /* Adjust based on preference */
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 30px;
+}
+
+nav ul li:last-child {
+    margin-right: 0; /* No right margin for the last item */
+}
+
+nav ul li a {
+    color: #ecf0f1;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #ffffff;
+    color: #2c3e50;
+}
+
+/* Main Content Styles */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centers children horizontally */
+    justify-content: center; /* centers children vertically */
+}
+
+.main-content {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer Styles */
+html, body {
+    height: 100%; /* Make sure the body takes full viewport height */
+}
+
+.content-wrapper {
+    min-height: 100%; 
+    margin-bottom: -60px; /* assuming footer height is 60px */
+    padding-bottom: 60px; /* match footer height so the content doesn't overlap the footer */
+}
+
+footer {
+    height: 60px; /* adjust to your footer's actual height */
+    padding: 10px 0;
+    background: linear-gradient(45deg, #2c3e50, #4a688f);
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    color: #ecf0f1;
+}
+
+/* Dataset.html Styles */
+.dataset-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0.8;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.data-image {
+    max-width: 50%; /* This will make the image 50% of its container's width */
+    display: block;
+    margin: 20px auto; /* Center the image horizontally */
+}
+
+/* Biography.html Styles */
+.bio-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0.8;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 20px;
+}
+
+/* Citizenship.html Styles */
+.button-container {
+    display: flex;
+    justify-content: center; /* Center align the buttons horizontally */
+}
+
+.yearly-buttons button, .monthly-buttons button {
+    margin: 10px; /* Add spacing between buttons */
+    padding: 10px 20px; /* Adjust padding for the buttons */
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    border: none; /* Remove button borders */
+    border-radius: 5px; /* Add rounded corners to buttons */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add hover effect */
+}
+
+.yearly-buttons button:hover, .monthly-buttons button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+button.active {
+    background-color: #2E7D32 !important; /* Darker green for active state */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25); /* Optional: Add a slight shadow for depth */
+    color: white !important; /* Set text color to white for active state */
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

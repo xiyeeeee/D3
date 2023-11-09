@@ -1,0 +1,14 @@
+main {
+    position: relative;
+}
+
+#tooltip {
+    position: absolute;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    min-width: 100px;
+    background-color: #fff;
+    border: 1px solid #000;
+    display: none;
+}

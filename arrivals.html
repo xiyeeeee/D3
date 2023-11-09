@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mode of Arrivals in Sarawak (2021)</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="arrivals.css">
+    <style>
+     
+    </style>
+
 </head>
+
 <body>
     <div class="content-wrapper">
         <header>
@@ -19,23 +25,61 @@
                     <li class="dropdown">
                         <a href="#">Visualizations</a>
                         <div class="dropdown-content">
-                            <a href="transport.html">Mode of Transport</a>
+                            <a href="transport.html">Mode of transport</a>
                             <a href="citizenship.html">Citizenship Over Time</a>
                             <a href="covid.html">COVID-19 Impact Analysis</a>
+                            <a href="region.html">Region Arrivals</a>
+                            <a href="arrivals.html">Sarawak Tourism Analysis</a>
                         </div>
                     </li>
                     <li><a href="profile.html">Profile</a></li>
                 </ul>
             </nav>
         </header>
-        <div class="content">
-            <h2>Mode of Arrivals</h2>
-            
-        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h2 id="chart-titles">Sarawak Visitor Arrivals</h2>
+        <figcaption id="data-caption"></figcaption>
+        <main>
+            <!-- <div class="yearly-buttons">
+                <button id="opt1_a" class="active">2017</button>
+                <button id="opt2_a">2018</button>
+                <button id="opt3_a">2019</button>
+                <button id="opt4_a">2020</button>
+                <button id="opt5_a">2021</button>
+            </div>
+            <div class="chart-buttons">
+                <button class="btn">Bar Chart</button>
+                <button class="btn">Line Chart</button>
+            </div>
+            <button class="btn" id="sort-btn">Sort the Bars</button> -->
+            <div id="container"></div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                 porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. 
+                 Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div id="container1"></div>
+            <div id="tooltip">
+            </div>
+        </main>
     </div>
     <footer>
         <p>© 2023 Sarawak Tourism Analysis Project. All rights reserved.</p>
     </footer>
-    <script src="script/arrivals.js"></script>
+    
+   <script src="script/arrivals.js"></script>
+    
 </body>
+
 </html>
