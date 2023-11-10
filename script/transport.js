@@ -46,6 +46,7 @@ function updateChart(data) {
         .attr("fill", (d, i) => colors(i));
     svg.append("g")
         .attr("font-size", 14)
+        .attr("font-weight", "bold") // Set font-weight to bold
         .attr("transform", `translate(35,80)`)
         .selectAll("text")
         .data(mode)
@@ -69,7 +70,8 @@ function updateChart(data) {
     svg.append("g")
         .attr("text-anchor", "middle")
         .attr("font-size", 12)
-        .attr("fill", "white")
+        .attr("fill", "black") // Set text color to black
+        .attr("font-weight", "bold") // Set font-weight to bold
         .attr("class", "pie")
         .attr("transform", `translate(${width / 2}, ${height / 2})`)
         .selectAll("text")
