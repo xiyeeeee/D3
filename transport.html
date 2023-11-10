@@ -4,14 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <title>Transportation Mode</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="transport.css">
-   
 </head>
 
-<body >
+<body>
     <div class="content-wrapper">
         <header>
             <h1>Sarawak Tourism Analysis (2017-2021)</h1>
@@ -24,7 +23,8 @@
                         <div class="dropdown-content">
                             <a href="transport.html">Mode of transport</a>
                             <a href="citizenship.html">Citizenship Over Time</a>
-                            <a href="covid.html">COVID-19 Impact Analysis</a>
+                            <a href="region.html">Regional Arrivals</a>
+                            <a href="arrivals.html">Foreign and Domestic Comparison</a>
                         </div>
                     </li>
                     <li><a href="profile.html">Profile</a></li>
@@ -36,6 +36,8 @@
         <br>
         <br>
         <br>
+        <h2 id="chart-titles">Arrivals by Mode of Transport (2017)</h2>
+        <figcaption id="data-caption"></figcaption>
         <main>
             <div class="yearly-buttons">
                 <button id="opt1_a" class="active">2017</button>
@@ -45,16 +47,17 @@
                 <button id="opt5_a">2021</button>
             </div>
             <div id="container"></div>
+            <div>2023 Sarawak Tourism Analysis Project. All rights reserved 2023 Sarawak Tourism Analysis Project. All
+                rights reserved 2023 Sarawak Tourism Analysis Project. All rights reserved</div>
         </main>
-        <script src="script/transport.js"></script>
+
     </div> <!-- end content-wrapper -->
     <footer>
         <p>© 2023 Sarawak Tourism Analysis Project. All rights reserved.</p>
     </footer>
 
-    <script>
-      
-    </script>
+  
+     <script src="script/transport.js"></script>
 
 </body>
 

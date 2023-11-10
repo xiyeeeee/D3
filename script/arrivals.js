@@ -14,12 +14,12 @@ const margin = {
 let years = ["2017", "2018", "2019", "2020", "2021"];
 
 // Define colors using D3's ordinal scale with the color scheme
-let colors = d3.scaleOrdinal()
+const colors = d3.scaleOrdinal()
     .domain(["Foreign", "Domestic", "Total"])
     .range(d3.schemeCategory10);
 
 // Load data from the "arrivals.csv" file
-d3.csv("./dataset/arrivals.csv", (res) => {
+d3.csv("./dataset/arrivals.csv").then((res) => {
     // Create an SVG element in the container
     const svg = d3.select("#container")
         .append("svg")
@@ -51,7 +51,7 @@ d3.csv("./dataset/arrivals.csv", (res) => {
         .text((d, i) => d);
 
     // Create x-axis scale using the years
-    let x = d3.scaleBand()
+    const x = d3.scaleBand()
         .domain(years)
         .range([margin.left, width - margin.right])
         .padding(0.2);
@@ -62,13 +62,13 @@ d3.csv("./dataset/arrivals.csv", (res) => {
         .call(d3.axisBottom(x));
 
     // Create y-axis scale based on data values
-    let y = d3.scaleLinear()
+    const y = d3.scaleLinear()
         .domain([0, d3.max(res, d => +d.value)])
         .range([height - margin.bottom, margin.top])
         .nice();
 
     // Create a sub-scale for grouping bars within a year
-    let dx = d3.scaleBand()
+    const dx = d3.scaleBand()
         .domain(["Foreign", "Domestic", "Total"])
         .range([0, x.bandwidth()])
         .padding(0.1);
@@ -90,9 +90,9 @@ d3.csv("./dataset/arrivals.csv", (res) => {
         .attr("height", d => y(0) - y(d.value))
         .attr("fill", d => colors(d.name))
         .style("cursor", "pointer")
-        .on("mousemove", (d,) => {
+        .on("mousemove", (event, d) => {
             // Show a tooltip on mouseover
-            let e = d3.event;
+            const e = event;
             d3.select("#tooltip")
                 .style("display", "block")
                 .style("left", e.pageX + 15 + "px")
@@ -105,16 +105,16 @@ d3.csv("./dataset/arrivals.csv", (res) => {
                     value: ${d.value}
                 `)
         })
-        .on("mouseleave", (d,) => {
+        .on("mouseleave", (event, d) => {
             // Hide the tooltip on mouseleave
-            let e = d3.event;
+            const e = event;
             d3.select("#tooltip")
                 .style("display", "none");
-        })
+        });
 
     // Call the stackedBar function to create a stacked bar chart
     stackedBar(res);
-})
+});
 
 // Function to create a stacked bar chart
 function stackedBar(res) {
@@ -149,7 +149,7 @@ function stackedBar(res) {
         .text((d, i) => d);
 
     // Create x-axis scale using the years
-    let x = d3.scaleBand()
+    const x = d3.scaleBand()
         .domain(years)
         .range([margin.left, width - margin.right])
         .padding(0.4);
@@ -160,14 +160,14 @@ function stackedBar(res) {
         .call(d3.axisBottom(x));
 
     // Group data by year
-    let o = {};
+    const o = {};
     res.forEach(d => {
         o[d.year] = o[d.year] || [];
         o[d.year].push(d)
     })
 
     // Calculate cumulative values for stacked bars
-    let data = Object.entries(o);
+    const data = Object.entries(o);
     data.forEach(([year, arr]) => {
         let sum = 0;
         arr.forEach(d => {
@@ -178,7 +178,7 @@ function stackedBar(res) {
     })
 
     // Create y-axis scale based on the stacked values
-    let y = d3.scaleLinear()
+    const y = d3.scaleLinear()
         .domain([0, d3.max(data, d => d3.sum(d[1], v => +v.value))])
         .range([height - margin.bottom, margin.top])
         .nice();
@@ -196,7 +196,7 @@ function stackedBar(res) {
         .append("g")
         .attr("transform", d => `translate(${x(d[0])}, 0)`)
         .each(function (arr) {
-            let g = d3.select(this);
+            const g = d3.select(this);
             g.selectAll("rect")
                 .data(arr[1])
                 .enter()
@@ -206,9 +206,9 @@ function stackedBar(res) {
                 .attr("height", d => y(d.v0) - y(d.v1))
                 .attr("fill", d => colors(d.name))
                 .style("cursor", "pointer")
-                .on("mousemove", (d,) => {
+                .on("mousemove", (event, d) => {
                     // Show a tooltip on mouseover
-                    let e = d3.event;
+                    const e = event;
                     d3.select("#tooltip")
                         .style("display", "block")
                         .style("left", e.pageX + 15 + "px")
@@ -221,11 +221,11 @@ function stackedBar(res) {
                     value: ${d.value}
                 `)
                 })
-                .on("mouseleave", (d,) => {
+                .on("mouseleave", (event, d) => {
                     // Hide the tooltip on mouseleave
-                    let e = d3.event;
+                    const e = event;
                     d3.select("#tooltip")
                         .style("display", "none");
                 })
-        })
+        });
 }
