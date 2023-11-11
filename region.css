@@ -1,0 +1,33 @@
+.btn {
+    margin: 10px;
+    /* Add spacing between buttons */
+    padding: 10px 20px;
+    /* Adjust padding for the buttons */
+    background-color: #09baea;
+    /* Green background color */
+    color: white;
+    /* White text color */
+    border: none;
+    /* Remove button borders */
+    border-radius: 5px;
+    /* Add rounded corners to buttons */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /* Add hover effect */
+}
+
+
+main {
+    position: relative;
+}
+
+#tooltip {
+    position: absolute;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    min-width: 100px;
+    background-color: #fff;
+    border: 1px solid #000;
+    display: none;
+}

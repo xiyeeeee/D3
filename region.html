@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mode of Arrivals in Sarawak (2021)</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="region.css">
+    
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <header>
+            <h1>Sarawak Tourism Analysis (2017-2021)</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dataset.html">Dataset</a></li>
+                    <li class="dropdown">
+                        <a href="#">Visualizations</a>
+                        <div class="dropdown-content">
+                            <a href="transport.html">Mode of transport</a>
+                            <a href="citizenship.html">Citizenship Over Time</a>
+                            <a href="covid.html">COVID-19 Impact Analysis</a>
+                            <a href="region.html">Region Arrivals</a>
+                            <a href="arrivals.html">Sarawak Tourism Analysis</a>
+                        </div>
+                    </li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h2 id="chart-titles">Region Arrivals (2017)</h2>
+        <figcaption id="data-caption"></figcaption>
+        <main>
+            <div class="yearly-buttons">
+                <button id="opt1_a" class="active">2017</button>
+                <button id="opt2_a">2018</button>
+                <button id="opt3_a">2019</button>
+                <button id="opt4_a">2020</button>
+                <button id="opt5_a">2021</button>
+            </div>
+            <div class="chart-buttons">
+                <button class="btn">Bar Chart</button>
+                <button class="btn">Line Chart</button>
+            </div>
+            <button class="btn" id="sort-btn">Sort</button>
+            <div id="container">
+            </div>
+            <div id="tooltip"></div>
+
+        </main>
+    </div>
+    <footer>
+        <p>© 2023 Sarawak Tourism Analysis Project. All rights reserved.</p>
+    </footer>
+    
+    <script src="script/region.js"></script>
+</body>
+
+</html>
