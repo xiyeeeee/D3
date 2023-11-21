@@ -1,5 +1,5 @@
 // Set the width and height of the SVG container
-const width = 800, height = 600;
+const width = 800, height = 400;
 
 // Create an SVG element and append it to the container with the id "container"
 const svg = d3.select("#container")

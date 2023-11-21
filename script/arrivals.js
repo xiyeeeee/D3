@@ -153,6 +153,7 @@ function stackedBar(res) {
         .domain(years)
         .range([margin.left, width - margin.right])
         .padding(0.4);
+       
 
     // Add x-axis to the chart
     svg.append("g")
@@ -187,6 +188,8 @@ function stackedBar(res) {
     svg.append("g")
         .attr("transform", `translate(${margin.left}, 0)`)
         .call(d3.axisLeft(y));
+  
+
 
     // Create stacked bars for each year
     svg.append("g")
