@@ -49,7 +49,7 @@ function updateChart(data) {
     // Define arc for pie chart
     let arc = d3.arc()
         .innerRadius(0)
-        .outerRadius(150);
+        .outerRadius(200);
 
     // Define transportation modes
     let mode = ["Air", "Land", "Sea"];
@@ -92,8 +92,8 @@ function updateChart(data) {
         .attr("fill", (d, i) => colors(i));
 
     // Adjust inner and outer radius for pie chart
-    arc.innerRadius(80)
-        .outerRadius(80);
+    arc.innerRadius(100)
+        .outerRadius(200);
 
     // Create text labels inside the pie chart
     svg.append("g")

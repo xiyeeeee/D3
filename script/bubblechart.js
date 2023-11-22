@@ -1,153 +1,109 @@
-const width = 900;
-const height = 600;
-let selectedYear = "2017"; // Default selected year
-let selectedMonth = "January"; // Default selected month
+// Define tooltip globally
+var tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 
-const container = d3.select("#bubble-chart-container");
+// Function to update bubble chart based on user input
+function updateBubbleChart() {
+    // Get selected country and year
+    var selectedCountry = document.getElementById("country").value;
+    var selectedYear = document.getElementById("year").value;
 
+    // Load CSV data based on selected year
+    var dataPath = 'dataset/Sarawak_Visitor_Arrivals_' + selectedYear + '.csv';
 
+    d3.csv(dataPath).then(function(data) {
+        // Filter data for the selected country
+        var countryData = data.filter(function(d) {
+            return d.Citizenship === selectedCountry;
+        })[0];
 
-// Add a class to the sidebar for selection
-const sidebar = d3.select(".bubble-sidebar");
-const countryNameElement = document.getElementById("country-name");
-const visitorsCountElement = document.getElementById("visitors-count");
-
-function handleMouseOver(d, value, valueScale, country) {
-    d3.select(this).attr("r", d => valueScale(d[value]) + 5);
-
-    // Update the sidebar's content
-    countryNameElement.innerHTML = `Country: ${d[country]}`;
-    visitorsCountElement.innerHTML = `Visitors: ${d[value]}`;
-
-    // Show the sidebar
-    sidebar.style("display", "block");
-}
-
-function handleMouseOut() {
-    // Hide the sidebar when the mouse pointer leaves the bubble
-    sidebar.style("display", "none");
-}
-
-function updateCaption(year, month) {
-    const caption = document.getElementById("data-caption");
-    caption.textContent = `Viewing data for ${year}, ${month}`;
-}
-
-function createBubbleChart(year, month) {
-    const csvFile = `dataset/Sarawak_Visitor_Arrivals_${year}.csv`;
-
-    d3.csv(csvFile).then(data => {
-        data = data.slice(1);
-
-        // Exclude entries with "Malaysia" in the "Citizenship" column
-        data = data.filter(d => d.Citizenship.trim() !== "Malaysia" && d.Citizenship.trim() !== "Total Domestic" && d.Citizenship.trim() !== "Total Foreigner" && d.Citizenship.trim() !== "Grand Total (Foreigner + Domestic)");
-
-        const country = "Citizenship";
-        const value = month.trim(); // Trim leading and trailing spaces
-
-        const maxVisitor = d3.max(data, d => parseFloat(d[value]));
-        const minVisitor = d3.min(data, d => parseFloat(d[value]));
-
-        // Modify the valueScale to increase the bubble size
-        const valueScale = d3.scaleSqrt()
-            .domain([minVisitor, maxVisitor])
-            .range([10, 120]); // Adjust the range to make the bubbles larger
-
-        // Create a color scale with a custom range of colors
-        const colorScale = d3.scaleSequential(d => {
-            // Adjust this formula to map data values to colors
-            const blueValue = d3.scaleLinear().domain([minVisitor, maxVisitor]).range([0, 1])(d);
-            return d3.interpolateHcl("lightblue", "darkblue")(blueValue);
+        // Extract monthly visitor data
+        var months = Object.keys(countryData).slice(1, 13);
+        var visitorCounts = months.map(function(month) {
+            return +countryData[month];
         });
 
-        container.selectAll("svg").remove();
+        // Update bubble chart with force simulation
+        createBubbleChart(months, visitorCounts);
+    });
+}
 
-        const svg = container.append("svg")
-            .attr("width", width)
-            .attr("height", height);
+// Function to create bubble chart with force simulation
+function createBubbleChart(xValues, yValues) {
+    // Clear previous bubble chart
+    d3.select("#bubble-chart").selectAll("*").remove();
 
-        const simulation = d3.forceSimulation(data)
-            .force("x", d3.forceX().strength(0.1).x(width / 2)) // Center horizontally
-            .force("y", d3.forceY().strength(0.1).y(height / 2)) // Center vertically
-            .force("collide", d3.forceCollide().radius(d => valueScale(d[value]) + 2).strength(0.8)); // Non-overlapping
+    // Set up SVG container
+    var width = 1000;
+    var height = 700;
 
-        const bubbles = svg.selectAll("circle")
-            .data(data)
-            .enter()
-            .append("circle")
-            .attr("class", "bubble") // Add a class for selection
-            .attr("r", d => valueScale(d[value])) // Set the radius based on data value
-            .style("fill", d => colorScale(d[value])) // Color based on the number of visitors
-            .style("stroke", "black")
-            .style("stroke-width", 5) // Adjust the border width
+    var svg = d3.select("#bubble-chart")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-        // Add hover effect to change the border color and display data
-        bubbles
-            .on("mouseover", function (d) {
-                d3.select(this).style("stroke", "yellow"); // Change border color to yellow on hover
-                handleMouseOver(d, value, valueScale, country);
-            })
-            .on("mouseout", function (d) {
-                d3.select(this).style("stroke", "black"); // Reset border color on mouseout
-                handleMouseOut();
-            });
+    // Create scale for bubble size
+    var radiusScale = d3.scaleSqrt()
+        .domain([0, d3.max(yValues)])
+        .range([5, 30]); // Adjust the range based on your preference
 
-        // Add click event to display more details (you can customize this)
-        // Add click event to display more details (modify as needed)
-        bubbles.on("click", function (d) {
-            // Update the tooltip with additional information
-            const tooltipContent = `<strong>${d.Citizenship}</strong><br>Visitors: ${d[selectedMonth]}<br>Additional Info: Your content here`;
-            document.getElementById("country-details").innerHTML = tooltipContent;
+    // Create bubbles for each data point with tooltips
+    var bubbles = svg.selectAll("circle")
+        .data(yValues)
+        .enter().append("circle")
+        .attr("r", function(d) { return radiusScale(d); })
+        .attr("stroke", "black")
+        .attr("stroke-width", 2)
+        .attr("fill", "lightblue")
+        .style("cursor", "pointer")
+        .on("mouseover", function (event, d, i) {
+            // Change border color to yellow during hover
+            d3.select(this).attr("stroke", "yellow");
+
+            // Show a tooltip on mouseover
+            let tooltipX = event.pageX + 15;
+            let tooltipY = event.pageY + 15;
+
+            d3.pointer(event);
+            tooltip
+                .style("display", "block")
+                .style("left", tooltipX + "px")
+                .style("top", tooltipY + "px")
+                .html(`
+                    Visitors: ${d}
+                `);
+        })
+        .on("mouseleave", function () {
+            // Reset border color on mouseleave
+            d3.select(this).attr("stroke", "black");
+
+            // Hide the tooltip on mouseleave
+            tooltip.style("display", "none");
         });
 
-        simulation.on("tick", () => {
-            bubbles
-                .attr("cx", d => d.x)
-                .attr("cy", d => d.y);
-        });
+    // Apply force simulation
+    var simulation = d3.forceSimulation(yValues.map(function(d, i) {
+        return { radius: radiusScale(d), value: d };
+    }))
+    .force("x", d3.forceX().strength(0.1).x(width / 2)) // Center horizontally
+    .force("y", d3.forceY().strength(0.1).y(height / 2)) // Center vertically
+    .force("collide", d3.forceCollide().radius(d => d.radius + 2).strength(0.8)) // Non-overlapping
+    .on("tick", function() {
+        bubbles.attr("cx", function(d) { return d.x; })
+            .attr("cy", function(d) { return d.y; });
     });
 
-    updateCaption(year, month);
+    // Add labels
+    svg.selectAll(".data-label")
+        .data(yValues)
+        .enter().append("text")
+        .attr("class", "data-label")  // Add a class to the text elements
+        .attr("x", function(d, i) { return bubbles.nodes()[i].cx.baseVal.value; })
+        .attr("y", function(d, i) { return bubbles.nodes()[i].cy.baseVal.value - radiusScale(d) - 10; })
+        .text(function(d) { return d; })
+        .attr("text-anchor", "middle");
 }
 
-function loadYear(year) {
-    selectedYear = year;
-    createBubbleChart(selectedYear, selectedMonth);
-
-    document.querySelectorAll(".yearly-buttons button").forEach(button => {
-        button.classList.remove("active");
-    });
-
-    document.getElementById(`year-${year}`).classList.add("active");
-}
-
-function loadMonth(month) {
-    selectedMonth = month;
-    createBubbleChart(selectedYear, selectedMonth);
-
-    // Remove "active" class from all monthly and Grand Total buttons
-    document.querySelectorAll(".monthly-buttons button").forEach(button => {
-        button.classList.remove("active");
-    });
-
-    // Add "active" class to the clicked month or Grand Total button
-    if (month.trim() === "Grand Total") {
-        document.getElementById("month-GrandTotal").classList.add("active");
-    } else {
-        document.getElementById(`month-${month}`).classList.add("active");
-    }
-}
-
-document.querySelectorAll(".yearly-buttons button").forEach(button => {
-    button.addEventListener("click", function () {
-        loadYear(this.getAttribute("data-year"));
-    });
-});
-
-document.querySelectorAll(".monthly-buttons button").forEach(button => {
-    button.addEventListener("click", function () {
-        loadMonth(this.getAttribute("data-month"));
-    });
-});
-
-createBubbleChart(selectedYear, selectedMonth);
+// Initial bubble chart with default values
+updateBubbleChart();

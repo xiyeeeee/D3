@@ -22,3 +22,14 @@
     background-color: black;
     color: white;
 }
+
+.textparagraph {
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 0;
+    text-align: justify;
+}
+
+#chart-titles, #data-caption {
+    text-align: center;
+}

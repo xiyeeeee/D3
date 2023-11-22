@@ -14,4 +14,12 @@ main {
     display: none;
 }
 
+.textparagraph {
+    margin-left: 90px;
+    margin-right: 90px;
+    text-align:justify;
+}
 
+.center{
+    text-align: center;
+}

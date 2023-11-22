@@ -4,9 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Citizenship Over Time</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
-    <link rel="stylesheet" href="style.css">  
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add or modify this style */
+        .axis-label {
+            font-size: 16px;
+        }
+
+        .data-label {
+            font-size: 14px;
+        }
+    </style>
+    
 </head>
 
 <body>
@@ -32,10 +43,9 @@
         </header>
         <br><br><br><br><br><br>
         <h1 class="heading">Country Arrivals</h2>
-        <br><br><br><br><br>
-        <div id="scatterplot"></div>
-
-        <br><br><br><br>
+        <br><br>
+        <div id="bubble-chart"></div>
+        <br><br>
 
         <div class="container">
             <div class="form-group">
@@ -55,6 +65,7 @@
                     <option value="Indonesia">Indonesia</option>
                     <option value="Japan">Japan</option>
                     <option value="Latin America">Latin America</option>
+                    <option value="Malaysia">Malaysia</option>
                     <option value="New Zealand">New Zealand</option>
                     <option value="Pakistan">Pakistan</option>
                     <option value="Peninsular Malaysia">Peninsular Malaysia</option>
@@ -83,9 +94,9 @@
                 </select>
             </div>
         
-            <button onclick="updateScatterplot()" class="button">Update Scatterplot</button>
-            <a href="bubble.html">
-                <button class="button">Bubble Chart Visualization</button>
+            <button onclick="updateBubbleChart()" class="button">Update Bubble Chart</button>
+            <a href="citizenship.html">
+                <button class="button">Scatterplot Visualization</button>
             </a>
         </div>
         <div id="tooltip"></div>
@@ -93,7 +104,7 @@
         <p>© 2023 Sarawak Tourism Analysis Project. All rights reserved.</p>
     </footer> -->
 
-    <script src="script/scatterplot.js"></script>
+    <script src="script/bubblechart.js"></script>
 </body>
 
 </html>
