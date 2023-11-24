@@ -154,35 +154,35 @@ function line(data) {
 
     // Add circles to the line chart for each data point
     g.append("g")
-        .selectAll("circle")
-        .data(data)
-        .enter()
-        .append("circle")
-        .attr("cx", d => x(d.name) + x.bandwidth() / 2)
-        .attr("cy", d => y(d.value))
-        .attr("r", 6)
-        .attr("fill", (d, i) => colors(d.name))
-        .style("cursor", "pointer")
-        .on("mousemove", (event, d) => {
-            // Show a tooltip on mouseover
-            let e = d3.pointer(event);
-            d3.select("#tooltip")
-                .style("display", "block")
-                .style("left", e[0] + 15 + "px")
-                .style("top", e[1] + 15 + "px")
-                .html(`
-                    Year: ${d.year}
-                    <br />
-                    Region: ${d.name}
-                    <br />
-                    Visitors: ${d.value}
-                `);
-        })
-        .on("mouseleave", (event, d) => {
-            // Hide the tooltip on mouseleave
-            d3.select("#tooltip")
-                .style("display", "none");
-        });
+    .selectAll("circle")
+    .data(data)
+    .enter()
+    .append("circle")
+    .attr("cx", d => x(d.name) + x.bandwidth() / 2)
+    .attr("cy", d => y(d.value))
+    .attr("r", 9)
+    .attr("fill", (d, i) => colors(d.name))  // Use the color scale
+    .style("cursor", "pointer")
+    .on("mousemove", (event, d) => {
+        // Show a tooltip on mouseover
+        let e = d3.pointer(event);
+        d3.select("#tooltip")
+            .style("display", "block")
+            .style("left", e[0] + 15 + "px")
+            .style("top", e[1] + 15 + "px")
+            .html(`
+                Year: ${d.year}
+                <br />
+                Region: ${d.name}
+                <br />
+                Visitors: ${d.value}
+            `);
+    })
+    .on("mouseleave", (event, d) => {
+        // Hide the tooltip on mouseleave
+        d3.select("#tooltip")
+            .style("display", "none");
+    });
 }
 
 // Function to create a bar chart
