@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Citizenship Over Time</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <header>
+            <h1>Sarawak Tourism Analysis (2017-2021)</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dataset.html">Dataset</a></li>
+                    <li class="dropdown">
+                        <a href="#">Visualizations</a>
+                        <div class="dropdown-content">
+                            <a href="transport.html">Mode of Transport</a>
+                            <a href="citizenship.html">Country Arrivals</a>
+                            <a href="region.html">Regional Arrivals</a>
+                            <a href="arrivals.html">Foreign and Domestic Comparison</a>
+                        </div>
+                    </li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+        <br><br><br><br><br><br>
+        <h1 class="heading">Country Arrivals</h2>
+        <div id="heatmap"></div>
+        <br><br>
+        <div class="container">
+            <div id="buttons"></div>
+            <br>
+            <a href="citizenship.html">
+                <button class="button">Scatterplot Visualization</button>
+            </a>
+        </div>
+        <div id="tooltip"></div>
+    <!-- <footer>
+        <p>© 2023 Sarawak Tourism Analysis Project. All rights reserved.</p>
+    </footer> -->
+
+    <script src="script/heatmap.js"></script>
+</body>
+
+</html>

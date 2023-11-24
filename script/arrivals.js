@@ -40,7 +40,7 @@ d3.csv("./dataset/arrivals.csv").then((res) => {
 
     // Create text labels for the color legend
     svg.append("g")
-        .attr("font-size", 12)
+        .attr("font-size", 16)
         .attr("transform", `translate(25,80)`)
         .selectAll("text")
         .data(colors.domain())
@@ -48,6 +48,7 @@ d3.csv("./dataset/arrivals.csv").then((res) => {
         .append("text")
         .attr("y", (d, i) => i * 30 + 10)
         .attr("dy", ".3em")
+        .attr("font-size", 16)
         .text((d, i) => d);
 
     // Create x-axis scale using the years
@@ -80,37 +81,42 @@ d3.csv("./dataset/arrivals.csv").then((res) => {
 
     // Create bars for each data point
     svg.append("g")
-        .selectAll("g")
-        .data(res)
-        .enter()
-        .append("rect")
-        .attr("x", d => x(d.year) + dx(d.name))
-        .attr("y", d => y(d.value))
-        .attr("width", dx.bandwidth())
-        .attr("height", d => y(0) - y(d.value))
-        .attr("fill", d => colors(d.name))
-        .style("cursor", "pointer")
-        .on("mousemove", (event, d) => {
-            // Show a tooltip on mouseover
-            const e = event;
-            d3.select("#tooltip")
-                .style("display", "block")
-                .style("left", e.pageX + 15 + "px")
-                .style("top", e.layerY + 15 + "px")
-                .html(`
-                    year: ${d.year}
-                    <br />
-                    arrivals: ${d.name}
-                    <br />
-                    value: ${d.value}
-                `)
-        })
-        .on("mouseleave", (event, d) => {
-            // Hide the tooltip on mouseleave
-            const e = event;
-            d3.select("#tooltip")
-                .style("display", "none");
-        });
+    .selectAll("g")
+    .data(res)
+    .enter()
+    .append("rect")
+    .attr("x", d => x(d.year) + dx(d.name))
+    .attr("y", height - margin.bottom)  // Start from the bottom
+    .attr("width", dx.bandwidth())
+    .attr("height", 0)  // Start with zero height
+    .attr("fill", d => colors(d.name))
+    .style("cursor", "pointer")
+    .on("mousemove", (event, d) => {
+        // Show a tooltip on mouseover
+        const e = event;
+        d3.select("#tooltip")
+            .style("display", "block")
+            .style("left", e.pageX + 15 + "px")
+            .style("top", e.layerY + 15 + "px")
+            .html(`
+                Year: ${d.year}
+                <br />
+                Arrivals: ${d.name}
+                <br />
+                Visitors: ${d.value}
+            `)
+    })
+    .on("mouseleave", (event, d) => {
+        // Hide the tooltip on mouseleave
+        const e = event;
+        d3.select("#tooltip")
+            .style("display", "none");
+    })
+    .transition()
+    .delay((d, i) => i * 100)  // Add a delay based on the index
+    .duration(500)  // Set the duration of the transition (in milliseconds)
+    .attr("y", d => y(d.value))  // Transition to the actual y position
+    .attr("height", d => height - margin.bottom - y(d.value));  // Transition to the actual height
 
     // Call the stackedBar function to create a stacked bar chart
     stackedBar(res);
@@ -189,46 +195,55 @@ function stackedBar(res) {
         .attr("transform", `translate(${margin.left}, 0)`)
         .call(d3.axisLeft(y));
   
-
-
-    // Create stacked bars for each year
+    // Create stacked bars for each year with transition
     svg.append("g")
-        .selectAll("g")
-        .data(data)
-        .enter()
-        .append("g")
-        .attr("transform", d => `translate(${x(d[0])}, 0)`)
-        .each(function (arr) {
-            const g = d3.select(this);
-            g.selectAll("rect")
-                .data(arr[1])
-                .enter()
-                .append("rect")
-                .attr("y", d => y(d.v1))
-                .attr("width", x.bandwidth())
-                .attr("height", d => y(d.v0) - y(d.v1))
-                .attr("fill", d => colors(d.name))
-                .style("cursor", "pointer")
-                .on("mousemove", (event, d) => {
-                    // Show a tooltip on mouseover
-                    const e = event;
-                    d3.select("#tooltip")
-                        .style("display", "block")
-                        .style("left", e.pageX + 15 + "px")
-                        .style("top", e.layerY + 15 + "px")
-                        .html(`
-                    year: ${d.year}
-                    <br />
-                    arrivals: ${d.name}
-                    <br />
-                    value: ${d.value}
-                `)
-                })
-                .on("mouseleave", (event, d) => {
-                    // Hide the tooltip on mouseleave
-                    const e = event;
-                    d3.select("#tooltip")
-                        .style("display", "none");
-                })
-        });
+    .selectAll("g")
+    .data(data)
+    .enter()
+    .append("g")
+    .attr("transform", d => `translate(${x(d[0])}, 0)`)
+    .each(function (arr) {
+        const g = d3.select(this);
+
+        // Create a transition for the entire group
+        g.transition()
+            .duration(1000)  // Set the duration of the transition (in milliseconds)
+            .attr("transform", d => `translate(${x(d[0])}, 0)`);
+
+        // Create stacked bars within the group with delay in transition
+        g.selectAll("rect")
+            .data(arr[1])
+            .enter()
+            .append("rect")
+            .attr("y", d => y(d.v1))
+            .attr("width", x.bandwidth())
+            .attr("height", 0)  // Start with zero height
+            .attr("fill", d => colors(d.name))
+            .style("cursor", "pointer")
+            .on("mousemove", (event, d) => {
+                // Show a tooltip on mouseover
+                const e = event;
+                d3.select("#tooltip")
+                    .style("display", "block")
+                    .style("left", e.pageX + 15 + "px")
+                    .style("top", e.layerY + 15 + "px")
+                    .html(`
+                        Year: ${d.year}
+                        <br />
+                        Arrivals: ${d.name}
+                        <br />
+                        Visitors: ${d.value}
+                    `);
+            })
+            .on("mouseleave", (event, d) => {
+                // Hide the tooltip on mouseleave
+                const e = event;
+                d3.select("#tooltip")
+                    .style("display", "none");
+            })
+            .transition()
+            .delay((d, i) => i * 100)  // Add a delay based on the index
+            .duration(500)  // Set the duration of the transition (in milliseconds)
+            .attr("height", d => y(d.v0) - y(d.v1));  // Transition to the actual height
+    });
 }

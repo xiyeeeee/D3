@@ -112,9 +112,9 @@ function line(data) {
     g.append("g")
         .attr("transform", `translate(0, ${height - 50})`)
         .call(d3.axisBottom(x))
-        .selectAll("text") // Select all the text elements in the x-axis
-        .style("font-size", "12px") // Set the font size to 16px
-        .style("font-weight", "bold"); // Set the font weight to bold
+        .selectAll("text")
+        .style("font-size", "12px")
+        .style("font-weight", "bold");
 
     // Create y-axis scale
     let y = d3.scaleLinear()
@@ -125,19 +125,32 @@ function line(data) {
     g.append("g")
         .attr("transform", `translate(220, 0)`)
         .call(d3.axisLeft(y))
-        .selectAll("text") // Select all the text elements in the y-axis
-        .style("font-size", "14px") // Set the font size to 16px
-        .style("font-weight", "bold"); // Set the font weight to bold
+        .selectAll("text")
+        .style("font-size", "14px")
+        .style("font-weight", "bold");
 
     // Create the line using the specified data
     let lineGenerator = d3.line()
         .x(d => x(d.name) + x.bandwidth() / 2)
         .y(d => y(d.value));
 
-    g.append("path")
-        .attr("d", lineGenerator(data))
+    // Append a path for the line and apply the gradual generation transition
+    const path = g.append("path")
+        .datum(data)
         .attr("fill", "none")
-        .attr("stroke", "#000");
+        .attr("stroke", "#000")
+        .attr("stroke-width", "3")
+        .attr("d", lineGenerator);
+
+    const totalLength = path.node().getTotalLength();
+
+    path
+        .attr("stroke-dasharray", totalLength + " " + totalLength)
+        .attr("stroke-dashoffset", totalLength)
+        .transition()
+        .duration(1500) // Set the duration of the transition in milliseconds
+        .ease(d3.easeLinear) // Use linear easing for a constant speed
+        .attr("stroke-dashoffset", 0);
 
     // Add circles to the line chart for each data point
     g.append("g")
@@ -204,8 +217,9 @@ function bar(data) {
         .enter()
         .append("rect")
         .attr("x", d => x(d.name))
-        .attr("y", y(0))
+        .attr("y", height - 50) // Start the bars from the bottom
         .attr("width", x.bandwidth())
+        .attr("height", 0) // Initial height is set to 0
         .style("cursor", "pointer")
         .on("mousemove", (event, d) => {
             // Show a tooltip on mouseover
@@ -228,7 +242,15 @@ function bar(data) {
                 .style("display", "none");
         })
         .transition()
-        .attr("height", d => y(0) - y(d.value))
-        .attr("y", d => y(d.value))
-        .attr("fill", (d, i) => colors(d.name));
+        .duration(1500) // Set the duration of the transition in milliseconds
+        .delay((d, i) => i * 100) // Add a delay based on the index of the bar
+        .attr("y", d => y(d.value)) // Set the y position to the top of each bar
+        .attr("height", d => height - 50 - y(d.value)) // Set the height of each bar
+        .attr("fill", (d, i) => colors(d.name))
+        .ease(d3.easeElastic.amplitude(0.1).period(0.5)); // Adjust amplitude and period
 }
+
+
+
+
+
