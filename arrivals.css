@@ -27,6 +27,7 @@ main {
 #container{
     width:100%;
     height:auto;
+    text-align: center;
 }
 
 /* For both bar chart legends */

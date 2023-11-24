@@ -4,7 +4,7 @@ const height = 800;
 
 // Define margins for the chart
 const margin = {
-    left: 150,
+    left: 250,
     right: 20,
     top: 100,
     bottom: 50
@@ -28,28 +28,29 @@ d3.csv("./dataset/arrivals.csv").then((res) => {
 
     // Create color legend using rectangles
     svg.append("g")
-        .attr("transform", `translate(0,80)`)
-        .selectAll("rect")
-        .data(colors.domain())
-        .enter()
-        .append("rect")
-        .attr("width", 20)
-        .attr("height", 20)
-        .attr("y", (d, i) => i * 30)
-        .attr("fill", (d, i) => colors(d));
+    .attr("transform", `translate(${margin.left - 200}, 80)`)  // Move the legend to the left
+    .selectAll("rect")
+    .data(colors.domain())
+    .enter()
+    .append("rect")
+    .attr("width", 20)
+    .attr("height", 20)
+    .attr("y", (d, i) => i * 30)
+    .attr("fill", (d, i) => colors(d));
 
     // Create text labels for the color legend
     svg.append("g")
-        .attr("font-size", 16)
-        .attr("transform", `translate(25,80)`)
-        .selectAll("text")
-        .data(colors.domain())
-        .enter()
-        .append("text")
-        .attr("y", (d, i) => i * 30 + 10)
-        .attr("dy", ".3em")
-        .attr("font-size", 16)
-        .text((d, i) => d);
+    .attr("font-size", 16)
+    .attr("transform", `translate(${margin.left - 175}, 80)`)  // Move the text labels to the left
+    .selectAll("text")
+    .data(colors.domain())
+    .enter()
+    .append("text")
+    .attr("y", (d, i) => i * 30 + 10)
+    .attr("dy", ".3em")
+    .attr("font-size", 16)
+    .text((d, i) => d);
+
 
     // Create x-axis scale using the years
     const x = d3.scaleBand()
@@ -59,10 +60,10 @@ d3.csv("./dataset/arrivals.csv").then((res) => {
 
     // Add x-axis to the chart
     svg.append("g")
-    .attr("transform", `translate(0, ${height - margin.bottom})`)
-    .call(d3.axisBottom(x))
-    .selectAll("text")
-    .attr("font-size", 14); 
+        .attr("transform", `translate(0, ${height - margin.bottom})`)
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+        .attr("font-size", 14); 
 
     // Create y-axis scale based on data values
     const y = d3.scaleLinear()
