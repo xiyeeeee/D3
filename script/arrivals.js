@@ -1,13 +1,13 @@
 // Set the width and height for the SVG container
 const width = 1000;
-const height = 600;
+const height = 800;
 
 // Define margins for the chart
 const margin = {
     left: 150,
     right: 20,
     top: 100,
-    bottom: 20
+    bottom: 50
 }
 
 // Define an array of years
@@ -59,8 +59,10 @@ d3.csv("./dataset/arrivals.csv").then((res) => {
 
     // Add x-axis to the chart
     svg.append("g")
-        .attr("transform", `translate(0, ${height - margin.bottom})`)
-        .call(d3.axisBottom(x));
+    .attr("transform", `translate(0, ${height - margin.bottom})`)
+    .call(d3.axisBottom(x))
+    .selectAll("text")
+    .attr("font-size", 14); 
 
     // Create y-axis scale based on data values
     const y = d3.scaleLinear()
@@ -77,7 +79,9 @@ d3.csv("./dataset/arrivals.csv").then((res) => {
     // Add y-axis to the chart
     svg.append("g")
         .attr("transform", `translate(${margin.left}, 0)`)
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y).tickSizeOuter(0))
+    .selectAll("text")
+    .attr("font-size", 14); 
 
     // Create bars for each data point
     svg.append("g")
@@ -164,7 +168,9 @@ function stackedBar(res) {
     // Add x-axis to the chart
     svg.append("g")
         .attr("transform", `translate(0, ${height - margin.bottom})`)
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+        .attr("font-size", 16); 
 
     // Group data by year
     const o = {};
@@ -193,7 +199,9 @@ function stackedBar(res) {
     // Add y-axis to the chart
     svg.append("g")
         .attr("transform", `translate(${margin.left}, 0)`)
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y).tickSizeOuter(0))
+        .selectAll("text")
+        .attr("font-size", 16);
   
     // Create stacked bars for each year with transition
     svg.append("g")

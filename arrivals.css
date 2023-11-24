@@ -23,3 +23,13 @@ main {
 .center{
     text-align: center;
 }
+
+#container{
+    width:100%;
+    height:auto;
+}
+
+/* For both bar chart legends */
+#container .legend, #container1 .legend {
+    transform: translate(20px, 80px); /* Adjust this translation */
+}
