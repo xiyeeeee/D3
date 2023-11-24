@@ -171,11 +171,11 @@ function line(data) {
                 .style("left", e[0] + 15 + "px")
                 .style("top", e[1] + 15 + "px")
                 .html(`
-                    year: ${d.year}
+                    Year: ${d.year}
                     <br />
-                    region: ${d.name}
+                    Region: ${d.name}
                     <br />
-                    value: ${d.value}
+                    Visitors: ${d.value}
                 `);
         })
         .on("mouseleave", (event, d) => {
@@ -229,11 +229,11 @@ function bar(data) {
                 .style("left", e[0] + 15 + "px")
                 .style("top", e[1] + 15 + "px")
                 .html(`
-                    year: ${d.year}
+                    Year: ${d.year}
                     <br />
-                    region: ${d.name}
+                    Region: ${d.name}
                     <br />
-                    value: ${d.value}
+                    Visitors: ${d.value}
                 `);
         })
         .on("mouseleave", (event, d) => {
