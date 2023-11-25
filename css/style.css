@@ -1,18 +1,18 @@
 
 /* Background Images */
 #indexbg {
-    background-image: url('img/sun.avif');
+    background-image: url('../img/sun.avif');
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 #sarawakbg {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/sarawak.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/sarawak.jpg');
     background-size: cover;
 }
 
 #profilebg {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/profilebg.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/profilebg.jpg');
     background-size: cover;
 }
 
