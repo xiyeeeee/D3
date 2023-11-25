@@ -171,6 +171,8 @@ function line(data) {
             .style("display", "block")
             .style("left", x + 15 + "px")
             .style("top", y + 15 + "px")
+            .style("font-weight", "bold")
+            .style("font-size", "16px")
             .html(`
                 Year: ${d.year}
                 <br />
@@ -235,6 +237,8 @@ function bar(data) {
                 .style("display", "block")
                 .style("left", x + 15 + "px")
                 .style("top", y + 15 + "px")
+                .style("font-weight", "bold")
+                .style("font-size", "16px")
                 .html(`
                     Year: ${d.year}
                     <br />
