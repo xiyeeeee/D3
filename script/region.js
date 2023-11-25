@@ -42,6 +42,7 @@ d3.csv("./dataset/Region.csv").then((res) => {
         .attr("font-size", 12)
         .attr("transform", `translate(25,20)`)
         .selectAll("text")
+        .style("font-weight", "bolder")
         .data(colors.domain())
         .enter()
         .append("text")
@@ -114,7 +115,7 @@ function line(data) {
         .call(d3.axisBottom(x))
         .selectAll("text")
         .style("font-size", "12px")
-        .style("font-weight", "bold");
+        .style("font-weight", "bolder");
 
     // Create y-axis scale
     let y = d3.scaleLinear()
@@ -127,7 +128,7 @@ function line(data) {
         .call(d3.axisLeft(y))
         .selectAll("text")
         .style("font-size", "14px")
-        .style("font-weight", "bold");
+        .style("font-weight", "bolder");
 
     // Create the line using the specified data
     let lineGenerator = d3.line()
@@ -168,8 +169,8 @@ function line(data) {
         let e = d3.pointer(event);
         d3.select("#tooltip")
             .style("display", "block")
-            .style("left", e[0] + 15 + "px")
-            .style("top", e[1] + 15 + "px")
+            .style("left", x + 15 + "px")
+            .style("top", y + 15 + "px")
             .html(`
                 Year: ${d.year}
                 <br />
@@ -198,7 +199,10 @@ function bar(data) {
 
     g.append("g")
         .attr("transform", `translate(0, ${height - 50})`)
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+        .style("font-size", "12px")
+        .style("font-weight", "bold"); 
 
     // Create y-axis scale
     let y = d3.scaleLinear()
@@ -208,7 +212,10 @@ function bar(data) {
 
     g.append("g")
         .attr("transform", `translate(220, 0)`)
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y))
+        .selectAll("text")
+        .style("font-size", "14px")
+        .style("font-weight", "bold"); 
 
     // Create rectangles for the bar chart
     g.append("g")
@@ -226,8 +233,8 @@ function bar(data) {
             let e = d3.pointer(event);
             d3.select("#tooltip")
                 .style("display", "block")
-                .style("left", e[0] + 15 + "px")
-                .style("top", e[1] + 15 + "px")
+                .style("left", x + 15 + "px")
+                .style("top", y + 15 + "px")
                 .html(`
                     Year: ${d.year}
                     <br />
