@@ -129,7 +129,7 @@ function line(data) {
         .selectAll("text")
         .style("font-size", "14px")
         .style("font-weight", "bolder");
-
+ 
     // Create the line using the specified data
     let lineGenerator = d3.line()
         .x(d => x(d.name) + x.bandwidth() / 2)

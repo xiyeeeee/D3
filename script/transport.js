@@ -98,7 +98,7 @@ function updateChart(data) {
     // Create text labels inside the pie chart
     svg.append("g")
         .attr("text-anchor", "middle")
-        .attr("font-size", 12)
+        .attr("font-size", 18)
         .attr("fill", "black") // Set text color to black
         .attr("font-weight", "bold") // Set font-weight to bold
         .attr("class", "pie")
@@ -111,7 +111,7 @@ function updateChart(data) {
         .attr("y", d => arc.centroid(d)[1])
         .call(t => {
             t.append("tspan")
-                .text(d => d.data.name + ":");
+                .text(d => d.data.name );
             t.append("tspan")
                 .attr("dy", 14)
                 .attr("dx", -10)
