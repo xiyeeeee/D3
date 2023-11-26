@@ -27,8 +27,8 @@ function updateHeatmap(selectedYear) {
 
         // Create the heatmap
         var margin = { top: 70, right: 70, bottom: 130, left: 100 };
-        var width = 1100 - margin.left - margin.right; // Increase width
-        var height = 800 - margin.top - margin.bottom; // Increase height
+        var width = 1000 - margin.left - margin.right; // Increase width
+        var height = 700 - margin.top - margin.bottom; // Increase height
 
         var svg = d3.select("#heatmap")
             .append("svg")

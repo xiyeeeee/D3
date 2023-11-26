@@ -35,11 +35,11 @@ function createScatterplot(xValues, yValues) {
     d3.select("#scatterplot").selectAll("*").remove();
 
     // Set up SVG container
-    var width = 950;
-    var height = 700;
+    var width = 1000;
+    var height = 600;
 
     // Adjust margins
-    var margin = { top: 20, right: 20, bottom: 50, left: 80 }; // Increase left margin
+    var margin = { top: 20, right: 30, bottom: 50, left: 80 }; // Increase left margin
 
     var svg = d3.select("#scatterplot")
         .append("svg")
@@ -52,7 +52,7 @@ function createScatterplot(xValues, yValues) {
     var xScale = d3.scaleBand()
         .domain(xValues)
         .range([50, width - 50])
-        .padding(0.1);
+        .padding(0.4);
 
     var yScale = d3.scaleLinear()
         .domain([0, d3.max(yValues)])
