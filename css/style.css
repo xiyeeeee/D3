@@ -189,7 +189,7 @@ footer {
     width: 55%;
     height: 400px;
     margin: 20px auto;
-    opacity: 0.8;
+    opacity: 1.0;
     overflow: hidden; /* This ensures border-radius applies to all child elements */
 }
 
